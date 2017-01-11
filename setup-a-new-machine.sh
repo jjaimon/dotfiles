@@ -30,6 +30,7 @@ cp -R ~/.gnupg ~/migration/home
 cp /Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist ~/migration  # wifi
 
 cp ~/Library/Preferences/net.limechat.LimeChat.plist ~/migration
+cp ~/Library/Preferences/com.tinyspeck.slackmacgap.plist ~/migration
 
 cp -R ~/Library/Services ~/migration # automator stuff
 
@@ -69,20 +70,39 @@ cp "~/Library/Application Support/Sublime Text 3/Packages" ~/migration
 
 ##############################################################################################################
 ### XCode Command Line Tools
-#      thx  https://github.com/alrra/dotfiles/blob/c2da74cc333/os/os_x/install_applications.sh#L39
+#      thx https://github.com/alrra/dotfiles/blob/ff123ca9b9b/os/os_x/installs/install_xcode.sh
 
-if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
+if ! xcode-select --print-path &> /dev/null; then
+
+    # Prompt user to install the XCode Command Line Tools
     xcode-select --install &> /dev/null
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
     # Wait until the XCode Command Line Tools are installed
-    while [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; do
+    until xcode-select --print-path &> /dev/null; do
         sleep 5
     done
-	xcode-select -p &> /dev/null
-	if [ $? -eq 0 ]; then
-        # Prompt user to agree to the terms of the Xcode license
-        # https://github.com/alrra/dotfiles/issues/10
-       sudo xcodebuild -license
-   fi
+
+    print_result $? 'Install XCode Command Line Tools'
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Point the `xcode-select` developer directory to
+    # the appropriate directory from within `Xcode.app`
+    # https://github.com/alrra/dotfiles/issues/13
+
+    sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+    print_result $? 'Make "xcode-select" developer directory point to Xcode'
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Prompt user to agree to the terms of the Xcode license
+    # https://github.com/alrra/dotfiles/issues/10
+
+    sudo xcodebuild -license
+    print_result $? 'Agree with the XCode Command Line Tools licence'
+
 fi
 ###
 ##############################################################################################################
@@ -92,7 +112,7 @@ fi
 ##############################################################################################################
 ### homebrew!
 
-# (if your maching has /usr/local locked down (like google's), you can do this to place everything in ~/.homebrew
+# (if your machine has /usr/local locked down (like google's), you can do this to place everything in ~/.homebrew
 mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
 export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 
@@ -118,10 +138,21 @@ bash < <( curl https://raw.github.com/jamiew/git-friendly/master/install.sh)
 # Type `git open` to open the GitHub page or website for a repository.
 npm install -g git-open
 
+# fancy listing of recent branches
+npm install -g git-recent
+
+# sexy git diffs
+npm install -g diff-so-fancy
+
+# trash as the safe `rm` alternative
+npm install --global trash-cli
+
+# install better nanorc config
+# https://github.com/scopatz/nanorc
+curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
 
 # github.com/rupa/z   - oh how i love you
 git clone https://github.com/rupa/z.git ~/code/z
-chmod +x ~/code/z/z.sh
 # consider reusing your current .z file if possible. it's painful to rebuild :)
 # z is hooked up in .bash_profile
 
@@ -145,7 +176,8 @@ sudo easy_install Pygments
 
 # change to bash 4 (installed by homebrew)
 BASHPATH=$(brew --prefix)/bin/bash
-sudo echo $BASHPATH >> /etc/shells
+#sudo echo $BASHPATH >> /etc/shells
+sudo bash -c 'echo $(brew --prefix)/bin/bash >> /etc/shells'
 chsh -s $BASHPATH # will set for current user only.
 echo $BASH_VERSION # should be 4.x not the old 3.2.X
 # Later, confirm iterm settings aren't conflicting.
@@ -162,6 +194,17 @@ ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/su
 ###
 ##############################################################################################################
 
+
+
+# improve perf of git inside of chromium checkout
+# https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md
+
+sudo sysctl kern.maxvnodes=$((512*1024))
+echo kern.maxvnodes=$((512*1024)) | sudo tee -a /etc/sysctl.conf
+
+# speed up git status
+git config status.showuntrackedfiles no
+git update-index --untracked-cache
 
 
 ##############################################################################################################
@@ -194,8 +237,7 @@ sh .osx
 # symlink it up!
 ./symlink-setup.sh
 
+# add manual symlink for .ssh/config and probably .config/fish
+
 ###
 ##############################################################################################################
-
-
-

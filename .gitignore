@@ -4,11 +4,12 @@
 .vim/swaps/*
 .vim/undo
 
-# git credential file 
+# git credential file
 .gitconfig.local
 
 
-
+# no thx
+node_modules
 
 # Folder view configuration files
 .DS_Store
@@ -24,3 +25,11 @@ Thumbs.db
 
 # Compiled Python files
 *.pyc
+
+# fish shell
+fishd.*
+.config/fish/fish_history
+fish/fish_history
+
+# random
+shilocation
