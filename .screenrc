@@ -1,0 +1,72 @@
+# Author: Jaimon Jose ( jjaimon@gmail.com )
+# Last Modified Time-stamp: <Tue Nov 08 16:34:01 2005>
+
+escape ``
+
+startup_message off
+
+deflogin on
+
+# 'vbell on' without the prepended 'set' keyword will change the default for 
+# subsequently opened windows. With the 'set' keyword we would change
+# the setting of the currently active window.
+
+vbell on
+vbell_msg "   Wuff  ----  Wuff!!  "
+bell '~Bell in Window %'
+
+# Extend the vt100 desciption with some sequences.
+termcap  vt100* ms:AL=\E[%dL:DL=\E[%dM:UP=\E[%dA:DO=\E[%dB:LE=\E[%dD:RI=\E[%dC
+terminfo vt100* ms:AL=\E[%p1%dL:DL=\E[%p1%dM:UP=\E[%p1%dA:DO=\E[%p1%dB:LE=\E[%p1%dD:RI=\E[%p1%dC
+
+#xterm understands both im/ic and doesn't have a status line.
+#Note: Do not specify im and ic in the real termcap/info file as
+#some programs (e.g. vi) will not work anymore.
+termcap  xterm hs@:cs=\E[%i%d;%dr:im=\E[4h:ei=\E[4l
+terminfo xterm hs@:cs=\E[%i%p1%d;%p2%dr:im=\E[4h:ei=\E[4l
+
+
+# Make the output buffer large for (fast) xterms.
+termcap xterm* OL=10000
+terminfo xterm* OL=10000
+
+#remove some stupid / dangerous key bindings
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
+#make them better
+bind '\\' quit
+bind 'K' kill
+bind 'I' login on
+bind 'O' login off
+bind '}' history
+bind ' ' other
+bind 'a' title		# Originally 'A'
+
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+
+# Yet another hack:
+# Prepend/append register [/] to the paste if ^a^] is pressed.
+# This lets me have autoindent mode in vi.
+register [ "\033:se noai\015a"
+register ] "\033:se ai\015a"
+bind ^] paste [.]
+
+terminfo xterm 'VR=\E[?5h:VN=\E[?5l:k1=\E[11~:k2=\E[12~:k3=\E[13~'
+termcap  xterm 'VR=\E[?5h:VN=\E[?5l:k1=\E[11~:k2=\E[12~:k3=\E[13~'
+termcap  xterm 'kh=\E[1~:kI=\E[2~:kD=\E[3~:kH=\E[4~:kP=\E[5~:kN=\E[6~'
+terminfo xterm 'kh=\E[1~:kI=\E[2~:kD=\E[3~:kH=\E[4~:kP=\E[5~:kN=\E[6~'
+
+# xterm hardstatus: use the window title.
+termcap  xterm 'hs:ts=\E]0;:fs=\007:ds=\E]0;Screen\007'
+terminfo xterm 'hs:ts=\E]0;:fs=\007:ds=\E]0;Screen\007'
+
+termcap con80x* "xn:f0=\033Op:f1=\033Oq:f2=\033Or:f3=\033Os:f4=\033Ot:f5=\033Ou:f6=\033Ov:f7=\033Ow:f8=\033Ox:f9=\033Oy:f.=\033On:f,=\033Ol:fe=\033OM:f+=\033Ok:f-=\033Om:f*=\033Oj:f/=\033Oo:fq=\033OX:kN=\033[6~:kP=\033[5~"
+
+scrollback 1500
+term rxvt
+
