@@ -7,7 +7,7 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias l="ls -l"
-alias ll="ls -al"
+alias ll="ls -alF"
 
 # mv, rm, cp
 alias mv='mv -v'
@@ -62,7 +62,7 @@ alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup 
 alias master="git checkout master"
 
 # Networking. IP address, dig, DNS
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 # alias dig="dig +nocmd any +multiline +noall +answer"
 # wget sucks with certificates. Let's keep it simple.
 alias wget="curl -O"
@@ -93,3 +93,26 @@ alias emptytrash=" \
 # Update installed Ruby gems, Homebrew, npm, and their installed packages
 alias brew_update="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew prune; brew doctor; npm-check -g -u"
 alias update_brew_npm_gem='brew_update; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update --no-document'
+
+# Added on 03-Apr-2017 for managing docker containers
+alias dc="docker-compose"
+
+function docker-ip() {
+    docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
+ }
+
+function docker-ips() {
+    docker inspect -f '{{.Name}} - {{.NetworkSettings.IPAddress }}' $(docker ps -aq)
+ }
+
+function docker-shell() {
+    docker exec -it $1 /bin/bash
+}
+
+function dc-shell() {
+    dc exec $1 /bin/bash
+}
+
+function docker-ps() {
+   docker ps |awk '{print $1, $2}'
+}
