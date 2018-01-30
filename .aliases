@@ -116,3 +116,9 @@ function dc-shell() {
 function docker-ps() {
    docker ps |awk '{print $1, $2}'
 }
+
+function docker-logs {
+    docker logs -f --tail 40 $1
+}
+
+alias dc-logs="dc logs -f --tail 40"
