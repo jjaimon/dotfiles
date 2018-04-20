@@ -10,23 +10,37 @@ bindkey -v
 
 fpath=( "$HOME/.zfunctions" $fpath )
 
+# POWERLEVEL9K_PROMPT variables
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_beginning"
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%f"
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%f "
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context os_icon ssh root_indicator dir dir_writable vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status time)
 
 # antigen time!
-source ~/code/antigen/antigen.zsh
-
+ZSHA_BASE=$HOME/work/git_wa/github/zsh-antigen
+source $ZSHA_BASE/antigen/antigen.zsh
 
 ######################################################################
 ### install some antigen bundles
 
 local b="antigen-bundle"
 
-
+antigen-use oh-my-zsh
 # Don't load the oh-my-zsh's library. Takes too long. No need.
 	# antigen use oh-my-zsh
 
 # Guess what to install when running an unknown command.
 $b command-not-found
-
+$b git
+if [[ $OSTYPE = "darwin"* ]]; then
+	$b osx
+fi
 # Helper for extracting different types of archives.
 $b extract
 
@@ -47,7 +61,7 @@ $b robbyrussell/oh-my-zsh plugins/z
 $b zsh-users/zsh-syntax-highlighting
 
 # history search
-$b zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
+$b zsh-users/zsh-history-substring-search #./zsh-history-substring-search.zsh
 
 # suggestions
 $b tarruda/zsh-autosuggestions
@@ -59,8 +73,10 @@ $b trapd00r/zsh-syntax-highlighting-filetypes
 $b mafredri/zsh-async
 $b sindresorhus/pure
 
+antigen theme bhilburn/powerlevel9k powerlevel9k
+#antigen-theme agnoster
 # Tell antigen that you're done.
-#antigen apply
+antigen apply
 
 ###
 #################################################################################################
@@ -84,11 +100,11 @@ chpwd_functions=( auto-ls $chpwd_functions )
 
 
 # Enable autosuggestions automatically
-zle-line-init() {
-    zle autosuggest-start
-}
+# zle-line-init() {
+#     zle autosuggest-start
+# }
 
-zle -N zle-line-init
+# zle -N zle-line-init
 
 
 # history mgmt
@@ -103,7 +119,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 # uncomment to finish profiling
 # zprof
 
-
+DEFAULT_USER=$USER
 
 # Load default dotfiles
 source ~/.bash_profile

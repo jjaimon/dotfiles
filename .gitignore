@@ -33,3 +33,6 @@ fish/fish_history
 
 # random
 shilocation
+
+# Visual Studio code configurations
+.vscode/

@@ -65,6 +65,7 @@ brew install node # This installs `npm` too using the recommended installation m
 brew install pv
 brew install rename
 brew install tree
+brew install ack
 brew install zopfli
 brew install ffmpeg --with-libvpx
 
@@ -76,6 +77,10 @@ brew install pidcat   # colored logcat guy
 brew install ncdu # find where your diskspace went
 
 brew install zsh
+
+# get fonts for my terminal
+brew tap caskroom/fonts
+brew cask install font-hack-nerd-font
 
 # Remove outdated versions from the cellar
 brew cleanup
