@@ -118,7 +118,11 @@ function docker-ps() {
 }
 
 function docker-logs {
-    docker logs -f --tail 40 $1
+    docker logs -f --tail 100 $1
 }
 
-alias dc-logs="dc logs -f --tail 40"
+alias dc-logs="dc logs -f --tail 100"
+
+alias git-tree="git log --graph --decorate --pretty=oneline --abbrev-commit"
+
+alias adb=/Users/jjaimon/work/Android/adt-bundle-mac/sdk/platform-tools/adb

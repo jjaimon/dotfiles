@@ -80,6 +80,11 @@ export NVM_DIR="$HOME/.nvm"
 zpath="$(brew --prefix)/etc/profile.d/z.sh"
 [ -s $zpath ] && source $zpath
 
+PATH="/usr/local/sbin:$PATH"
+ANDROID_HOME=/Users/jjaimon/work/Android/adt-bundle-mac/sdk
+
+export PATH ANDROID_HOME
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 ##
 ## Completion…
@@ -134,7 +139,5 @@ shopt -s globstar 2> /dev/null
 
 shopt -s checkwinsize       # update the value of LINES and COLUMNS after each command if altered
 shopt -s hostcomplete       # attempt hostname expansion when @ is at the beginning of a word
-export PATH="/usr/local/sbin:$PATH"
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
