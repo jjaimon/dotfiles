@@ -80,7 +80,7 @@ export NVM_DIR="$HOME/.nvm"
 zpath="$(brew --prefix)/etc/profile.d/z.sh"
 [ -s $zpath ] && source $zpath
 
-PATH="/usr/local/sbin:$PATH"
+PATH=/usr/local/sbin:$PATH:~/bin/
 ANDROID_HOME=/Users/jjaimon/work/Android/adt-bundle-mac/sdk
 
 export PATH ANDROID_HOME
@@ -139,5 +139,14 @@ shopt -s globstar 2> /dev/null
 
 shopt -s checkwinsize       # update the value of LINES and COLUMNS after each command if altered
 shopt -s hostcomplete       # attempt hostname expansion when @ is at the beginning of a word
+
+
+export GPG_TTY=$(tty)
+
+# https://github.com/magicmonty/bash-git-prompt
+if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
+  source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
+fi
 
 

@@ -81,6 +81,8 @@ alias ungz="gunzip -k"
 # File size
 alias fs="stat -f \"%z bytes\""
 
+# Kubernetics
+alias k=kubectl
 # Empty the Trash on all mounted volumes and the main HDD. then clear the useless sleepimage
 alias emptytrash=" \
     sudo rm -rfv /Volumes/*/.Trashes; \

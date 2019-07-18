@@ -15,6 +15,24 @@ vbell on
 vbell_msg "   Wuff  ----  Wuff!!  "
 bell '~Bell in Window %'
 
+hardstatus alwayslastline "%{=b}%{G} %{b}%w %=%{kG}%C%A %D,%d/%m/%y"
+shelltitle "Shell"
+
+# encoding
+defutf8 on
+defencoding utf-8
+
+defscrollback 5024
+
+caption always "%{= 2m}%{+b w}Screen: %n | %h %=%t %D %d/%m/%y %c:%s"
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<  %=% [%{=b)%{Y}%l%{g}]"
+
+# # term
+defbce on
+# # term xterm
+# # term xterm-256color # for xterm and xterm-like terminals
+term rxvt-256color # for urxvt
+
 # Extend the vt100 desciption with some sequences.
 termcap  vt100* ms:AL=\E[%dL:DL=\E[%dM:UP=\E[%dA:DO=\E[%dB:LE=\E[%dD:RI=\E[%dC
 terminfo vt100* ms:AL=\E[%p1%dL:DL=\E[%p1%dM:UP=\E[%p1%dA:DO=\E[%p1%dB:LE=\E[%p1%dD:RI=\E[%p1%dC
@@ -66,7 +84,4 @@ termcap  xterm 'hs:ts=\E]0;:fs=\007:ds=\E]0;Screen\007'
 terminfo xterm 'hs:ts=\E]0;:fs=\007:ds=\E]0;Screen\007'
 
 termcap con80x* "xn:f0=\033Op:f1=\033Oq:f2=\033Or:f3=\033Os:f4=\033Ot:f5=\033Ou:f6=\033Ov:f7=\033Ow:f8=\033Ox:f9=\033Oy:f.=\033On:f,=\033Ol:fe=\033OM:f+=\033Ok:f-=\033Om:f*=\033Oj:f/=\033Oo:fq=\033OX:kN=\033[6~:kP=\033[5~"
-
-scrollback 1500
-term rxvt
 

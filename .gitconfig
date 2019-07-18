@@ -100,15 +100,14 @@
 	prune = true
 [diff]
 	compactionHeuristic = true
-[remote "origin"]
-	fetch = +refs/heads/*:refs/remotes/origin/*
 [stash]
 	showPatch = true
 [log]
 	date = relative
 [user]
 	name = Jaimon Jose
-	email = jaimon.jose@koopid.io
+	email = jjaimon@gmail.com 
+	signingkey = 8FFC48DBE3F5467E
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -117,3 +116,4 @@
 	trustExitCode = true
 [commit]
 	template = /Users/jjaimon/.stCommitMsg
+	gpgsign = true
