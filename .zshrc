@@ -118,9 +118,11 @@ ZSH_HIGHLIGHT_STYLES[isearch]='fg=cyan'
 
 
 # antigen time!
-ZSHA_BASE=$HOME/work/git_wa/github/zsh-antigen
-source $ZSHA_BASE/antigen/antigen.zsh
-
+echo "Loading antigen.zsh"
+# Workaround for a antigen cache fails to initialize problem
+rm -f .antigen/* > /dev/null 2>&1
+# brew install antigen
+source $(brew --prefix)/share/antigen/antigen.zsh
 ######################################################################
 ### install some antigen bundles
 
