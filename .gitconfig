@@ -17,7 +17,7 @@
 	git = !exec git
 
 [core]
-	excludesfile = /Users/jjaimon/.gitignore_global
+	excludesfile = /Users/jaimonjose/.gitignore_global
 	attributesfile = ~/.gitattributes
 
 [pager]
@@ -115,5 +115,5 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	template = /Users/jjaimon/.stCommitMsg
+	template = /Users/jaimonjose/.stCommitMsg
 	gpgsign = true

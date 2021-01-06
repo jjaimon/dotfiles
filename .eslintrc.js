@@ -1,6 +1,7 @@
 module.exports = {
 
   "extends": [
+    "eslint:all",
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
@@ -37,7 +38,7 @@ module.exports = {
     "max-len": ["error", 120, {
       "ignoreComments": true,
       "ignoreUrls": true,
-      "tabWidth": 2
+      "tabWidth": 4
     }],
     "no-unused-vars": ["error", {
       "vars": "all",
@@ -58,12 +59,13 @@ module.exports = {
     "comma-dangle": "off",
     "strict": "off",
     "curly": "off",
-    "arrow-parens": ["error", "as-needed"],
+    "arrow-parens": ["warning", "as-needed"],
     "no-return-assign": "off",
     "unicorn/prefer-type-error": "off",
     "require-jsdoc": "off",
     "no-implicit-coercion": "off",
-    "capitalized-comments": "warn"
+    "capitalized-comments": "warn",
+    "require-camelcase": "never"
 
     }
 };

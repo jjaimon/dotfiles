@@ -75,7 +75,7 @@ zpath="$(brew --prefix)/etc/profile.d/z.sh"
 [ -s $zpath ] && source $zpath
 
 PATH=/usr/local/sbin:$PATH:~/bin/
-ANDROID_HOME=/Users/jjaimon/work/Android/adt-bundle-mac/sdk
+ANDROID_HOME=/Users/jaimonjose/work/Android/adt-bundle-mac/sdk
 
 export PATH ANDROID_HOME
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

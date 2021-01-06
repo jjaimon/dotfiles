@@ -45,7 +45,8 @@ brew install entr
 # github util. gotta love `hub fork`, `hub create`, `hub checkout <PRurl>`
 brew install hub
 
-
+# Colorize many uniz commands and ls output
+brew install grc 
 # mtr - ping & traceroute. best.
 brew install mtr
 
@@ -88,3 +89,7 @@ brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize
 
 # Remove outdated versions from the cellar
 brew cleanup
+
+# syntax highlight less output
+brew install source-highlight
+
