@@ -149,4 +149,7 @@ if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
 fi
 
-
+JAVA_HOME=`/usr/libexec/java_home`
+CLICOLOR=1
+GPG_TTY=$(tty)
+export JAVA_HOME CLICOLOR GPG_TTY
