@@ -238,3 +238,6 @@ zstyle ':completion:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43
 LESSPIPE=`which src-hilite-lesspipe.sh`
 export LESSOPEN="| ${LESSPIPE} %s"
 export LESS=' -R -X -F '
+widgetzip() {
+  zip -r $1.zip $1 -x "**/.*" -x "**/__MACOSX"
+}
