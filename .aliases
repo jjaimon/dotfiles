@@ -135,3 +135,4 @@ alias dc-logs="dc logs -f --tail 100"
 alias git-tree="git log --graph --decorate --pretty=oneline --abbrev-commit"
 
 alias adb=/Users/jaimonjose/work/Android/adt-bundle-mac/sdk/platform-tools/adb
+alias ibrew="arch -x86_64 /usr/local/bin/brew"

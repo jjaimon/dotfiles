@@ -74,7 +74,7 @@ export NVM_DIR="$HOME/.nvm"
 zpath="$(brew --prefix)/etc/profile.d/z.sh"
 [ -s $zpath ] && source $zpath
 
-PATH=/usr/local/sbin:$PATH:~/bin/
+PATH=/Users/jaimonjose/.pyenv/shims:/usr/local/sbin:$PATH:~/bin/
 ANDROID_HOME=/Users/jaimonjose/work/Android/adt-bundle-mac/sdk
 
 export PATH ANDROID_HOME
@@ -153,3 +153,6 @@ JAVA_HOME=`/usr/libexec/java_home`
 CLICOLOR=1
 GPG_TTY=$(tty)
 export JAVA_HOME CLICOLOR GPG_TTY
+. "$HOME/.cargo/env"
+
+export PATH="$HOME/.poetry/bin:$PATH"

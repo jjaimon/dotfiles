@@ -136,13 +136,13 @@ antigen-use oh-my-zsh
 $b command-not-found
 $b git
 if [[ $OSTYPE = "darwin"* ]]; then
-	$b osx
+	$b macos
 fi
 # Helper for extracting different types of archives.
 $b extract
 
 # atom editor
-$b atom
+#$b atom
 
 # homebrew  - autocomplete on `brew install`
 $b brew
@@ -169,6 +169,7 @@ $b trapd00r/zsh-syntax-highlighting-filetypes
 # dont set a theme, because pure does it all
 $b mafredri/zsh-async
 $b sindresorhus/pure
+$b poetry
 
 antigen theme bhilburn/powerlevel9k powerlevel9k
 #antigen-theme agnoster
@@ -241,3 +242,15 @@ export LESS=' -R -X -F '
 widgetzip() {
   zip -r $1.zip $1 -x "**/.*" -x "**/__MACOSX"
 }
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+
+export PATH="$HOME/.poetry/bin:$PATH"
+md-view() {
+  pandoc $1 | lynx -stdin
+}
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jaimonjose/work/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jaimonjose/work/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jaimonjose/work/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jaimonjose/work/google-cloud-sdk/completion.zsh.inc'; fi
