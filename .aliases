@@ -62,7 +62,8 @@ alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup 
 alias master="git checkout master"
 
 # Networking. IP address, dig, DNS
-alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias myip="curl https://ipinfo.io/ip"
+# alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 # alias dig="dig +nocmd any +multiline +noall +answer"
 # wget sucks with certificates. Let's keep it simple.
 alias wget="curl -O"
@@ -136,3 +137,29 @@ alias git-tree="git log --graph --decorate --pretty=oneline --abbrev-commit"
 
 alias adb=/Users/jaimonjose/work/Android/adt-bundle-mac/sdk/platform-tools/adb
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
+
+function k-pod-logs() {
+  kubectl logs --tail=1000 -f -l app=$1 --all-containers=true  --max-log-requests=10
+}
+
+function k-pod-restart() {
+  kubectl rollout restart deployment/$1
+}
+
+function k-pod-update() {
+  [[ $1 == 'koopiddlbot-dev' ]] && IMAGE='koopiddlbot' || ( [[ $1 == 'languagedetection' ]] && IMAGE='lingua-rest' ) || IMAGE=$1
+  kubectl set image deployments/$1 $1=us-east4-docker.pkg.dev/koopid-prd/dx-docker/$IMAGE:$2
+}
+
+function k-pod-scale() {
+  kubectl scale --replicas=$2 deployment/$1
+}
+
+function k-apply() {
+  [[ -z $TAG ]] && echo "Environment variable TAG must be set...." || envsubst < $1 | kubectl apply -f -
+}
+
+function k-pod-ls() {
+  k get deployment $1 -o wide
+  #kubectl get deployment -o go-template --template='{{range .items}}{{range .spec.template.spec.containers}}{{printf "%-20v   %s\n" .name .image}} {{end}}{{end}}'
+}

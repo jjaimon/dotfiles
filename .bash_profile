@@ -154,5 +154,5 @@ CLICOLOR=1
 GPG_TTY=$(tty)
 export JAVA_HOME CLICOLOR GPG_TTY
 . "$HOME/.cargo/env"
-
-export PATH="$HOME/.poetry/bin:$PATH"
+export GAE_SDK_ROOT=/Users/jaimonjose/work/google-cloud-sdk
+export PATH=$PATH:/Users/jaimonjose/work/google-cloud-sdk

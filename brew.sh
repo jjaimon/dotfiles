@@ -85,6 +85,7 @@ brew cask install font-hack-nerd-font
 
 # Useful quicklook plugins
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize
+brew install --cask --no-quarantine syntax-highlight
 # https://macitbetter.com/BetterZip-Quick-Look-Generator/
 
 # Remove outdated versions from the cellar
